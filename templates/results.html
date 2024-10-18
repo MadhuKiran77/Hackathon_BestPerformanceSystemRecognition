@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Students Results for {{ top_students['Year'].iloc[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Top 3 Students for Year {{ top_students['Year'].iloc[0] }}</h1>
+
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>Predicted Score</th>
+                <th>Rank</th>
+            </tr>
+            {% for student in top_students.itertuples() %}
+            <tr>
+                <td>{{ student.Name }}</td>
+                <td>{{ student.Predicted_Score }}</td>
+                <td>{{ student.Rank | int }}</td>  <!-- Use the Jinja filter to cast Rank to int -->
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/" class="button">Go Back</a>
+    </div>
+</body>
+</html>
